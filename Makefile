@@ -21,7 +21,7 @@ migrate: ## Run django migrations
 	UID=$(USER_UID) docker-compose -f ${COMPOSE_FILE} run --rm back ./manage.py migrate
 
 loadfixtures: ## Load fixtures using django load_data
-	UID=$(USER_UID) docker-compose -f ${COMPOSE_FILE} run --rm back ./manage.py loadfixtures
+	UID=$(USER_UID) docker-compose -f ${COMPOSE_FILE} run --rm back ./manage.py loaddata articles.json
 
 collecstatic: ## Collect django static files
 	UID=$(USER_UID) docker-compose -f ${COMPOSE_FILE} run --rm back ./manage.py collectstatic --no-input
