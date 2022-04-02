@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:12.5
+    env_file:
+      - ./env/postgres/env.develop
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  back:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: ./env/back/env.develop
+    volumes:
+      - ./src:/src
+      - back_media_files:/app/media
+      - back_static_files:/app/static
+    depends_on:
+      - postgres
+    command: /start
+
+  nginx:
+    image: nginx:1.18
+    ports:
+      - "80:80"
+    depends_on:
+      - back
+    volumes:
+      - ./volumes/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - back_media_files:/app/media
+      - back_static_files:/app/static
+
+volumes:
+  back_media_files:
+  back_static_files:
+  postgresql_data:

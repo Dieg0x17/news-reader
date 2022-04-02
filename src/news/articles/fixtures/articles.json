@@ -1,0 +1,86 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$8SJGHdzik3zDvNcZjA2Saw$U8WkZRTxpcJNITkZaWJ1qq3TM0PHqwcaru3+elpa3rg=",
+      "last_login": "2022-04-01T21:46:06.734Z",
+      "is_superuser": true,
+      "username": "root",
+      "first_name": "Diego",
+      "last_name": "Rasero",
+      "email": "diegolo.r8@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2022-04-01T21:08:27Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "articles.articletranslation",
+    "pk": 1,
+    "fields": {
+      "language_code": "en",
+      "title": "Scientists Discover Specific Neurons Involved in Making Memories",
+      "slug": "neurons",
+      "description": "<h2>The Birth of a Memory</h2>\r\n\r\n<p>In a new&nbsp;<a href=\"https://www.nature.com/articles/s41593-022-01020-w\" rel=\"noopener\" target=\"_blank\">paper in&nbsp;Nature Neuroscience,</a>&nbsp;which investigated the neural dynamics of memory formation, scientists discovered two types of neuronal cells that fire at perceived boundaries in our experience, which are believed by researchers to represent the ending and beginning of new memories.</p>\r\n\r\n<p>&ldquo;We knew that there are neurons that can distinguish sharp sensory transitions ⁠&mdash; a sudden sound, a flash of a visual stimulus ⁠&mdash; but the mechanisms responsible for demarcating complex cognitive events were completely unknown,&rdquo; says Gabriel Kreiman, a co-author of the study and professor in the department of ophthalmology at Harvard Medical School.&nbsp;</p>\r\n\r\n<p>Kreiman and his colleagues gathered their data via intracranial recordings, where electrodes are placed inside the skull that pick up the electrical activity of neurons. Due to the highly invasive nature of this type of neural recording, it is generally rare for neuroscientists to use this method of gathering data on the brain.&nbsp;</p>\r\n\r\n<p>However, these types of intracranial electrodes are often placed on the brains of epilepsy patients in order to locate the sites of their seizures. With their consent, epilepsy patients will carry out certain tasks while neuroscientists closely monitor their brain activity, and this was the case in this study.&nbsp;</p>\r\n\r\n<p>Participants in the study were asked to watch film clips with what investigators called &ldquo;cognitive boundaries,&rdquo; and for research purposes, defined these boundaries as either &ldquo;hard&rdquo; or &ldquo;soft.&rdquo; However, the researchers acknowledge that in daily life these distinctions might be more nuanced and trickier to define.&nbsp;</p>\r\n\r\n<p>&quot;An example of a soft boundary would be a scene with two people walking down a hallway and talking, and in the next scene, a third person joins them, but it is still part of the same overall narrative,&quot;&nbsp;<a href=\"https://www.eurekalert.org/news-releases/945017\" rel=\"noopener\" target=\"_blank\">said</a>&nbsp;lead author of the study Ueli Rutishauser in a press release.</p>\r\n\r\n<p>An example of a hard boundary would be if the scene completely changed to a new location with new characters.</p>\r\n\r\n<p>The researchers were surprised to find specific types of cells firing when participants would view these hard or soft boundaries in the film clips. Boundary cells responded to both soft and hard boundaries, and event cells, which are a specific type of neuron in the cortex, only responded to hard boundaries. The researchers suggest that when the firing of boundary and event cells peak, the brain enters the state of creating a new memory.&nbsp;</p>\r\n\r\n<p>Rutishauser&nbsp;<a href=\"https://www.eurekalert.org/news-releases/945017\" rel=\"noopener\" target=\"_blank\">describes</a>&nbsp;the response of boundary and event cells as something similar to creating a new folder in your computer where memories can be saved; when these cells fire again, the folder is closed and you create another one. If the brain needs to focus on a past memory, it uses the peaks of neural activity at these boundaries to locate the correct folder.&nbsp;</p>\r\n\r\n<h2>The Trick of Memory Recall</h2>\r\n\r\n<p>Giving some weight to their hypothesis, the researchers found that participants could more accurately remember images from the film clip if they had been followed by a hard or soft boundary, when a supposed new memory was being formed. Additionally, participants found it trickier to remember the sequence of images in the film clips if the images fell on either side of a hard boundary, which suggests the brain had them occupying separate memories.&nbsp;</p>\r\n\r\n<p>According to Kreiman, the level of detail that the intracranial recordings offered the researchers was essential in making the observations that led to their discovery.&nbsp;</p>\r\n\r\n<p>&ldquo;Other techniques that examine the brain from the outside in a non-invasive manner do not have the spatial and temporal resolution to reveal these types of neuronal events,&rdquo; says Kreiman.</p>\r\n\r\n<p>Kreiman offers an analogy; if we wanted to study music preferences in people, we could ask individuals their preferences (single neuron studies like this one) and tally their answers, or we could ask an entire city to shout their favorite musician at the same time and average out the sounds. It would be very tricky to interpret the latter.&nbsp;</p>\r\n\r\n<p>Researchers also noticed that when event cells fired in unison with the internal neural rhythms of the brain, namely the theta rhythm, participants were better at recalling the order of the images they had seen in the film clips.&nbsp;<a href=\"https://www.sciencedirect.com/topics/medicine-and-dentistry/theta-rhythm\" rel=\"noopener\" target=\"_blank\">Previous</a>&nbsp;studies have linked theta rhythms with cognitive tasks like learning, memory and navigation, so this finding makes sense in the context of existing research.&nbsp;</p>\r\n\r\n<h2>Small and Big Picture</h2>\r\n\r\n<p>Combining the small-scale findings of how these individual event and boundary cells behave with the larger neural dynamics is key to getting a more rounded picture of how memory operates at a behavioral level.&nbsp;</p>\r\n\r\n<p>&ldquo;It is essential to link the big-picture view at the behavioral level with the internal mechanisms that can only be revealed at the cellular level,&rdquo; Kreiman says.&nbsp; &ldquo;If we want to make progress towards understanding memory formation, and eventually helping people with memory deficits, bridging neurons to behavior is fundamental.&rdquo;&nbsp;</p>\r\n\r\n<p>Kreiman adds that moving forward, understanding how these boundary and event cells may behave in more nuanced contexts, where hard and soft boundaries are less obvious, will be particularly important. He believes that neurons might respond in a graded manner, indicating the degree of separation of different events.&nbsp;</p>\r\n\r\n<p>On a broader note, it&rsquo;s interesting to speculate about how the firing of these memory cells, and their relationship to neural theta rhythms, contribute to our autobiographical sense of selfhood.&nbsp;</p>\r\n\r\n<p>&ldquo;Those theta oscillations probably reflect the activity of large numbers of neurons and the timing of a given neuron&rsquo;s activity with respect to those rhythms likely reflects how each individual cell interacts with the rest of the network,&rdquo; says Kreiman.</p>\r\n\r\n<p>&ldquo;Exactly how these signals lead to the notion of selfhood and autobiographical memories remains a topic for further investigation.&rdquo;&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div>\r\n<div>&nbsp;</div>\r\n</div>",
+      "master": 1
+    }
+  },
+  {
+    "model": "articles.articletranslation",
+    "pk": 3,
+    "fields": {
+      "language_code": "en",
+      "title": "AI Is Revolutionizing Prosthetic Arm Control",
+      "slug": "ai",
+      "description": "<p>Advances in the fine motion capable with prosthetic arms has not been matched by in users&#39; ability to control them. AI systems are changing</p>\r\n\r\n<div>\r\n<div>&nbsp;</div>\r\n</div>",
+      "master": 2
+    }
+  },
+  {
+    "model": "articles.articletranslation",
+    "pk": 4,
+    "fields": {
+      "language_code": "es",
+      "title": "La IA está revolucionando el control de prótesis de brazo",
+      "slug": "IA",
+      "description": "<p>Los avances en la capacidad de movimiento fino de los brazos prot&eacute;sicos no han sido igualados por la capacidad de los usuarios para controlarlos. Los sistemas de IA est&aacute;n cambiando</p>",
+      "master": 2
+    }
+  },
+  {
+    "model": "articles.articletranslation",
+    "pk": 7,
+    "fields": {
+      "language_code": "es",
+      "title": "Científicos descubren neuronas específicas involucradas en la creación de recuerdos",
+      "slug": "neuronas",
+      "description": "<p>En un nuevo estudio, los electrodos intracraneales ayudaron a revelar las c&eacute;lulas de nuestro cerebro y los mecanismos neurol&oacute;gicos responsables de la creaci&oacute;n de la memoria.</p>",
+      "master": 1
+    }
+  },
+  {
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+      "image": "neurons.jpg",
+      "author": 1,
+      "updated_on": "2022-04-02T14:37:38.996Z",
+      "created_on": "2022-04-01T21:17:01.763Z",
+      "draft": false
+    }
+  },
+  {
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+      "image": "ai.jpg",
+      "author": 1,
+      "updated_on": "2022-04-02T14:39:24.863Z",
+      "created_on": "2022-04-02T11:06:11.111Z",
+      "draft": false
+    }
+  }
+]

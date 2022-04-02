@@ -1,0 +1,225 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% translate "News Reader" %}</title>
+    <meta name="description" content="{% translate "News reader site." %}">
+    <meta name="og:title" property="og:title" content="{% translate "News Reader" %}">
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/bootstrap-grid.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/bootstrap-reboot.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/bootstrap-utilities.css" %}"/>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        #content {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        .article_image_list {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .article_sign_list {
+            bottom: 0;
+            position: relative;
+        }
+
+        .load_more {
+            z-index: 999;
+            bottom: 0;
+            left: 0;
+            position: fixed;
+        }
+    </style>
+
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script>
+        page = 1;
+        next = true;
+
+        function update_filters() {
+            page = 1;
+            next = true;
+
+            // empty content
+            $("#count-value").html(0);
+            $("#content").empty();
+            load_articles(page)
+        }
+
+        function get_list_article(slug, title, image, description, date, author) {
+            return '<article class="mb-3" onclick="article_detail(\'' + slug + '\')"><div class="row mx-2"><h2 class="article_title_list">' + title + '</h2></div><div class="row mx-2"><div class="col-3"><img class="article_image_list img-fluid" src="' + image + '" alt=""></div><div class="col-9"><div class="article_description_list mb-3">' + description + '</div><div class="article_sign_list">' + date + ' {% translate "by" %} ' + author + '</div></div></div></article>';
+        }
+
+        function get_detail_article(title, image, description, date, author){
+            return '<div class="modal-dialog modal-xl" role="document"><div class="modal-content rounded-5 shadow"><div class="modal-header p-5 pb-4 border-bottom-0"><h2 class="fw-bold mb-0">'+title+'</h2><button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" onclick="close_detail()"></button></div><div class="modal-body p-5 pt-0"><article><div class="row mx-2 mb-2"><div class="col-12"><img class="article_image_detail mx-auto d-block img-thumbnail" src="'+image+'" alt=""></div></div><div class="row mx-12"><div class="col-9"><div class="article_description_detail mb-3">'+description+'</div><div class="article_sign_detail"><small class="text-muted">'+date+' {% translate "by" %} '+author+'</small></div></div></div></article></div></div></div>'
+        }
+
+        function load_articles() {
+            console.log(page);
+            // get filter values
+            search = $("#search").val();
+            date_from = $("#date_from").val();
+            date_to = $("#date_to").val();
+            // get order value
+            order_by = $("#order_by").val();
+
+            payload = {"page": page,};
+            if (search) {
+                payload["search"] = search;
+            }
+            if (date_from) {
+                payload["start_date"] = date_from;
+            }
+            if (date_to) {
+                payload["end_date"] = date_to;
+            }
+            if (order_by) {
+                payload["order"] = order_by;
+            }
+            // get articles list
+            if (next != null){
+                $.ajax({
+                    url: "{% url 'articles-list' %}",
+                    data: payload,
+                    type: "GET",
+                    success: function (response) {
+                        // update count
+                        count = response["count"];
+                        $("#count-value").html(count);
+                        // update page
+                        page++;
+                        next = response["next"];
+                        articles = response["results"]
+                        // add articles to DOM
+                        articles.forEach(function (obj) {
+                            date = new Date(obj.created_on);
+                            author = obj.author.first_name + " " + obj.author.last_name;
+                            article = get_list_article(obj.slug, obj.title, obj.image, obj.clean_description, date.toString(), author);
+                            $("#content").append(article);
+                        });
+
+                    },
+                    error: function (xhr) {
+
+                    }
+                });
+            }
+        }
+
+        function article_detail(slug) {
+            history.pushState(null, "", "?detail=" + slug);
+            // get article detail
+            $.ajax({
+                url: "{% url 'articles-list' %}" + slug +'/',
+                type: "GET",
+                success: function (response) {
+                    // show full article
+                    date = new Date(response.created_on);
+                    author = response.author.first_name + " " + response.author.last_name;
+                    article = get_detail_article(response.title, response.image, response.description, date.toString(), author)
+                    $("#detail").html(article);
+                    $("#detail").modal('show');
+
+                },
+                error: function (xhr) {
+
+                }
+            });
+        }
+
+        function close_detail() {
+            // hide article detail
+            window.history.replaceState(null, null, window.location.pathname);
+            $("#detail").modal('hide');
+        }
+
+        function load() {
+            set_content_height();
+            update_filters();
+            url_params = new URLSearchParams(window.location.search);
+            if (url_params.has('detail')) {
+                slug = url_params.get('detail');
+                article_detail(slug);
+            }
+        }
+
+        function set_content_height() {
+            $("#content").height($(window).height() - $("#content").offset().top);
+        }
+
+        $(window).on('resize', function () {
+            set_content_height();
+        });
+
+        $('#detail').on("hide.bs.modal", function () {
+            close_detail();
+        });
+        $('.modal-backdrop').on('click', function () {
+            close_detail();
+        });
+
+    </script>
+</head>
+<body onload="load()">
+<header class="d-flex flex-wrap py-2 bg-dark">
+    <div class="col-6">
+        <h3 class="text-start text-white px-2">{% translate "News Reader" %}</h3>
+    </div>
+    <div class="col-6 text-end px-2">
+        <small class="text-white mx-5" id="count"><span id="count-value">0</span> {% translate "News" %}</small>
+        <a class="btn btn-success" href="{% url "rss" %}">RSS</a>
+        <a class="btn btn-success" href="{% url "atom" %}">Atom</a>
+    </div>
+</header>
+<div id="filters">
+    <div class="row p-2">
+        <div class="col-6">
+            <div class="form-floating">
+                <input class="form-control rounded-4" type="text" id="search" onchange="update_filters()">
+                <label for="search">{% translate "Search:" %}</label>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-floating">
+                <input class="form-control rounded-4" type="date" id="date_from" onchange="update_filters()">
+                <label for="date_from">{% translate "Date from:" %}</label>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-floating">
+                <input class="form-control rounded-4" type="date" id="date_to" onchange="update_filters()">
+                <label for="date_to">{% translate "Date to:" %}</label>
+            </div>
+        </div>
+        <div class="col-2 text-end">
+            <div class="form-floating">
+                <select class="form-select rounded-4" name="order_by" id="order_by" onchange="update_filters()">
+                    <option value="recent">{% translate "Recent" %}</option>
+                    <option value="old">{% translate "Old" %}</option>
+                </select>
+                <label for="order_by">{% translate "Order:" %}</label>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div id="content">
+</div>
+
+<div class="modal fade" id="detail">
+</div>
+
+<button class="load_more btn btn-dark px-3 m-2" onclick="load_articles(page)">+</button>
+
+</body>
+</html>
