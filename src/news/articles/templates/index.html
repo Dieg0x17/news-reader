@@ -46,6 +46,14 @@
         page = 1;
         next = true;
 
+        function truncate( str, n, use_word_boundary ){
+          if (str.length <= n) { return str; }
+          const subString = str.substr(0, n-1);
+          return (use_word_boundary
+            ? subString.substr(0, subString.lastIndexOf(" "))
+            : subString) + "&hellip;";
+        }
+
         function update_filters() {
             page = 1;
             next = true;
@@ -104,7 +112,8 @@
                         articles.forEach(function (obj) {
                             date = new Date(obj.created_on);
                             author = obj.author.first_name + " " + obj.author.last_name;
-                            article = get_list_article(obj.slug, obj.title, obj.image, obj.clean_description, date.toString(), author);
+                            description = truncate( obj.clean_description, 1000, true )
+                            article = get_list_article(obj.slug, obj.title, obj.image, description, date.toString(), author);
                             $("#content").append(article);
                         });
 
